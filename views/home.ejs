@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<!-- //newcode -->
+<!-- // -->
+<head>
+  <meta charset="utf-8">
+  <title>E-Kart</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <% if(value){%>
+        <div class="navbar-header">
+          <form action="/home/<%= value._id %>" method="post">
+            <button  class="btn btn-link" type="submit">E-Kart</button>
+          </form>
+        </div>
+      <%}%>
+      <% if(!value){%>
+        <div class="navbar-header">
+          <button   class="btn btn-link" type="submit">E-Kart</button>
+        </div>
+        <%}%>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- 6 -->
+          <!-- <li id="home"><a href="/">HOME</a></li> -->
+          <!-- <li id="about"><a href="/about">ABOUT US</a></li> -->
+         
+          <li id="contact"><a href="/contact">CONTACT-US</a></li>
+          <% if(!value){ %>
+          <li id="signin"><a href="/signup">signIn</a></li>
+         <li>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" style="margin-top: 7px;" type="button" data-toggle="dropdown">logInAs
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li id="login"><a href="/login">Customer</a></li>
+              <li id="sellerlogin"><a href="/slogin">Seller</a></li>
+            </ul>
+          </div>
+         
+        </li>
+          <%}%>
+        
+      <% if(value){%>
+      <li style ="margin-top:16px;"><%=value.username %></li>
+        <%}%>
+        <% if(value){%>
+          <li> 
+            <form style ="margin-top:11px" class="form-inline" action="/loggedout" method="POST" >
+              <button class="btn btn-sm btn btn-danger"  type="submit" >logout</button>
+            </form>
+          </li> 
+          <%}%> 
+            
+          <% if(value){%>
+            <li> 
+            <form  style="margin-top: 11px; margin-right: 7px;"   action="/cart/<%= value._id %>" method="post">
+          <button class="btn btn-sm btn-outline-secondary"  type ="submit" >cart <i class="fa fa-shopping-cart"></i></button>
+          
+        </form>
+        </li>
+      <%}%>
+      </ul>
+
+
+    </div>
+ 
+  </nav>
+
+  <style media="screen">
+    .carousel-cell {
+      width: 66%; 
+      margin-right: 5px;
+      }
+  
+      /* cell number */
+      .carousel-cell:before {
+        display: block;
+      }
+  .bs-example{
+    margin: 20px;
+  }
+  .icon-input-btn{
+      display: inline-block;
+      position: relative;
+  }
+  .icon-input-btn input[type="submit"]{
+      padding-left: 2em;
+  }
+  .icon-input-btn .glyphicon{
+      display: inline-block;
+      position: absolute;
+      left: 0.65em;
+      top: 30%;
+  }
+</style>
+  </head>
+  <script>
+    $(document).ready(function(){
+      $(".icon-input-btn").each(function(){
+            var btnFont = $(this).find(".btn").css("font-size");
+            var btnColor = $(this).find(".btn").css("color");
+        $(this).find(".glyphicon").css("font-size", btnFont);
+            $(this).find(".glyphicon").css("color", btnColor);
+            if($(this).find(".btn-xs").length){
+                $(this).find(".glyphicon").css("top", "24%");
+            }
+      }); 
+    });
+    </script>
+  <body>
+    <div class="container">
+
+
+
+
+<!-- <h1 class="w3-center">Simple Slider using Flickity Plugin</h1> -->
+<div class="carousel" data-flickity='{ "wrapAround": true, "autoPlay": true }'>
+  <div class="carousel-cell">
+   
+    <img class="w3-image" src="https://smash-images.photobox.com/original/5f04c1b41fd48d1b10ff27dfc90548bf13608845_Large-Print-lifestyle-3_1-2600.jpg">
+    
+ 
+</div>
+  <div class="carousel-cell">
+    <img class="w3-image" src="https://smash-images.photobox.com/original/bca8e5fa7862a2cfaefc300c5b572e7a6dc6f3f3_Standard-Prints-lifestyle-3_1-2600.jpg">
+  </div>
+  <div class="carousel-cell">
+    <img class="w3-image" src="https://smash-images.photobox.com/original/a422aed1a721e933961b19ea9e47e07fc71e0699_Acrylic-Prints-lifestyle-3_1-2600.jpg">
+  </div>
+</div>
+<div class="carousel p" data-flickity='{ "wrapAround": true, "autoPlay": false }'>
+    <div class="carousel-cell">
+      <img class="w3-image" src="https://smash-images.photobox.com/original/5f04c1b41fd48d1b10ff27dfc90548bf13608845_Large-Print-lifestyle-3_1-2600.jpg">
+    </div>
+    <div class="carousel-cell">
+      <img class="w3-image" src="https://smash-images.photobox.com/original/bca8e5fa7862a2cfaefc300c5b572e7a6dc6f3f3_Standard-Prints-lifestyle-3_1-2600.jpg">
+    </div>
+    <div class="carousel-cell">
+      <img class="w3-image" src="https://smash-images.photobox.com/original/a422aed1a721e933961b19ea9e47e07fc71e0699_Acrylic-Prints-lifestyle-3_1-2600.jpg">
+    </div>
+  </div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+
+<div class="container " style="margin-top:50px;">
+<div class="row">
+
+<% if(productsList){ %>
+    <%  productsList.forEach(function(product){ %>
+  
+      <div class="col-sm-2" style="margin-left:70px ;">
+    <div class="card" style="width: 12rem;">
+  <% if(value){%>
+    <form action="/info/<%=product.productId%>/<%=value._id%>" method="POST">
+      <input type="image" class="card-img-top" style="height:110px;" src=<%= product.productImage %> alt="submit">
+   </form>
+   <%}%>
+   <% if(!value){%>
+    <form action="/info/<%=product.productId%>/not_in" method="POST" >
+      <input type="image" class="card-img-top" style="height:110px;" src=<%= product.productImage %> alt="submit">
+   </form>
+   <%}%>
+      <div class="card-body">
+        <h7 class="card-title text-justify"><%= product.productTitle %></h7>
+        <br>
+        <h7 class="card-title text-justify">Rs: <%= product.productPrice %></h7>
+        <p class="card-text"><%= product.productDescription %></p>
+        </div>
+        <form action="/login/<%= product.productId %>" method="POST">
+      <div class="card-body">
+        <% if(value){ %>
+        <button  type="submit" class="btn btn-primary" >Buy</button>
+        <input type="text" class=invisible name= em value=<%=value.email %>>
+        <input type="text" class=invisible name= un value=<%=value.username %>>
+        <!-- <a href="#" class="card-link">Another link</a> -->
+        <% } %>
+      </div>
+    </div>  
+  </div>
+</form>
+
+  <% });%>
+
+  <% } %>
+  
+
+</div>
+</div>
+
+
+
+
+<% if(productsList){ %>
+
+<p><%= productsList.length %><p>
+<% } %>
+
+
+<%- include("partials/footer"); -%>

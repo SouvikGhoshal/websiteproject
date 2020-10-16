@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>E-Kart</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  
+  
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <%if(userDoc){%>
+      <div class="navbar-header"> 
+     
+        <form action="/home/<%=userDoc._id %>" method="post">
+        <button class="btn btn-light" type="submit">E-Kart</button>
+      </form>
+   
+      </div>
+      <%}%>
+     <% if(!userDoc){ %>
+        <div class="navbar-header">
+     
+          <form action="/loggedout" method="post">
+          <button class="btn btn-light" type="submit">E-Kart</button>
+        </form>
+     
+       
+
+     <% }%>
+
+        <ul class="nav navbar-nav navbar-right">
+          <!-- 6 -->
+          <!-- <li id="home"><a href="/">HOME</a></li> -->
+          <!-- <li id="about"><a href="/about">ABOUT US</a></li> -->
+         
+          <li id="contact"><a href="/contact">CONTACT-US</a></li>
+          <% if(!userDoc){ %>
+          <li id="signin"><a href="/signup">signIn</a></li>
+          <li id="login"><a href="/login">logIn</a></li>
+          <%}%>
+         <li style ="margin-top:16px;"><%= userDoc.username %></li>
+
+         <% if(userDoc){%>
+          <li> 
+            <form style ="margin-top:11px" class="form-inline" action="/loggedout" method="POST" >
+              <button class="btn btn-sm btn btn-danger"   type="submit" >logout</button>
+            </form>
+          </li> 
+          <%}%>
+        </ul>
+
+
+    </div>
+ 
+  </nav>
+
+</head>
+
+
+    <h1> ITEM PURCHASED!! </h1>

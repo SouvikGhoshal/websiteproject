@@ -1,0 +1,47 @@
+<%- include("partials/header"); -%>
+<div style="margin-left: 100px;margin-top: 40px;"class="container">
+   
+<%prods.forEach(function(prod){%>
+    <div class="row">
+        <div class="col-sm-2" style="margin-left: 40px;">
+        <img src=<%=prod.productImage%>>
+    </div>
+    <div class="col-sm-2" style="margin-left: 40px;">
+       <ul>
+           <label >productId:-</label>
+       <li style="list-style-type: none;"> <p> <%=prod.productId%> </p></li>
+       <label > peroduct price:-</label>
+       <li style="list-style-type: none;"><p>Rs: <%=prod.productPrice%> </p></li> 
+      <label> product Description:-</label>
+       <li style="list-style-type: none;"> <p>  <%=prod.productDescription%></p></li>
+       <label> product Description:-</label>
+       <li style="list-style-type: none;"> <p>   <%=prod.productType%></p>  </li> 
+
+       <div>
+        
+        
+        <label> positivecomments-:  </label>
+          <% var newcount=0 %>
+        <%  prod.comments.forEach(function(comment){ %>
+            
+            <% if (comment.sentimentAsociate.predictions[0]===1){ %>
+              <% newcount= newcount+1 %>
+              <% } %>
+              <%})%>
+       </div>
+             <p><%= newcount %></p>
+    </ul>
+    
+    </div>
+</div>
+   
+<%})%>
+
+</div>
+
+</body>
+</html>
+<div style="margin-top:500px;"
+
+<%- include("partials/footer"); -%>
+<div>

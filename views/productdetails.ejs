@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>E-Kart</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  
+  
+  <nav class="navbar navbar-default">
+    <div class="container">
+        <%if(userDoc){%>
+            <div class="navbar-header">
+           
+              <form action="/home/<%=userDoc._id %>"  method="POST">
+              <button class="btn btn-light" type="submit">E-Kart</button>
+            </form>
+             
+            </div> 
+            <%}%>
+           <% if(!userDoc){ %>
+              <div class="navbar-header">
+              <form action="/loggedout" method="POST">
+                <button class="btn btn-light" type="submit">E-Kart</button>
+              </form>
+           <% }%>
+        <ul class="nav navbar-nav navbar-right">
+         
+         
+          <li id="contact" style="margin-left: 700px;margin-top:0px; text-align-last: right ;"><a href="/contact">CONTACT-US</a></li>
+          <% if(!userDoc){ %>
+          <li id="signin" style="margin-left: 30px;"><a href="/signup">signIn</a></li>
+          <li id="login" style="margin-left: 30px;"><a href="/login">logIn</a></li>
+          <%}%>
+          <% if(userDoc){%>
+          <li style ="margin-top:16px; margin-left: 30px;"><%= userDoc.username %></li>
+         <% }%>
+         <% if(userDoc){%>
+          <li> 
+            <form style ="margin-top:11px" class="form-inline" action="/loggedout" method="POST" >
+              <button class="btn btn-sm btn btn-danger"   type="submit" >logout</button>
+            </form>
+          </li> 
+          <%}%>
+        </ul>
+      </div>
+  </nav>
+
+</head>
+    <body>
+          <table style="margin-left: 365px;">
+            
+                <tr style="border :1px black solid;" >
+                    <td style="border :1px black solid;"><img src=<%=product.productImage %> class="card-img-top" style="height:200px;"></td>
+                    <td style="border :1px black solid;padding-left: 100px;"><p><%=product.productType %></p></td>
+                    <td style="border :1px black solid;padding-left: 100px;"><p><%=product.productDescription %></p></td>
+               </tr >
+        </table>
+<hr>
+<h1 style="margin-left: 20px;">Comments-:</h1>
+<ul  style="list-style-type: none;">
+<%  product.comments.forEach(function(comment){ %>
+  
+  <li style="border :1px black solid;padding-left: 100px;margin-left:75px ;">
+    <p>Date:  <%=comment.date%></p>
+    <p> username: <%= comment.username %> </p>
+    <p><%= comment.comment %></p>
+    <div style="margin-top: 50px;">
+    
+      <p> UserRatings:  <%= comment.Ratings %> </p>
+      <% if(userDoc && product){%>
+     <% if(comment.sentimentAsociate.predictions[0]==1){ %>
+         
+          <p>From your comment it looks like you are satisfied with the product!</p>
+        
+   
+        <% } %>
+      
+        <% if(comment.sentimentAsociate.predictions[0]==0){ %>
+         
+          <p>From your comment it looks like you are not satisfied with the product we regret for your inconvinence!</p>
+         
+         <% } %>
+        <%}%>
+    <!-- <p>Date:  <%=comment.date%></p> -->
+  </div>
+  </li>
+
+  <%}); %>
+  <% if(userDoc && product && purchasedele){%>
+  <li> 
+    <form action="/<%=userDoc._id %>/<%=product.productId %>/comment"  style="margin-left:75px;" method="POST">
+      <textarea name="newcomment" id="" cols="100" rows="5" placeholder="Enter Comments:"></textarea>
+      <br>
+      <label>Enter Ratings:-</label>
+      <input type="number" name="rating" placeholder="Enter Ratings" max="5" min="1"></input>
+      
+      <button type="submit" class="btn btn-success">Post Comment: </button>
+    </form>  
+  
+  </li>
+   <%}%>
+  </ul>
+
+
+</body>
+
+
+<div style="margin-top:500px;"
+
+<%- include("partials/footer"); -%>
+<div>
